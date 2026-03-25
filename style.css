@@ -1,9 +1,7 @@
-/* Общие стили для всей страницы */
 body {
     margin: 0;
     padding: 0;
-    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); /* любое изображение на фон */
-    background-size: cover;
+    background: white;
     background-position: center;
     background-attachment: fixed;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,7 +11,6 @@ body {
     min-height: 100vh;
 }
 
-/* Контейнер для центрирования калькулятора */
 .calculator-container {
     display: flex;
     justify-content: center;
@@ -22,39 +19,36 @@ body {
     padding: 20px;
 }
 
-/* Основной блок калькулятора */
 .calculator {
-    background-color: #1e1e1e;  /* тёмный фон калькулятора (ночная тема) */
+    background-color: #1e1e1e;
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     width: 300px;
 }
 
-/* Экран результата */
 .result {
     width: auto;
-    height: 80px;                /* увеличенный размер окна вывода */
+    height: 80px;
     background-color: #2d2d2d;
-    border-radius: 5px;         /* скругленные края */
+    border-radius: 5px;
     text-align: right;
     padding: 0 15px;
     margin-bottom: 20px;
-    color: #4caf50;              /* изменён цвет вывода (зелёный) */
+    color: #f0f0f0;
     font-size: 2.5rem;
-    font-family: 'Courier New', monospace; /* изменён шрифт цифр */
-    font-weight: bold;           /* более толстый шрифт */
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
     line-height: 80px;
     overflow-x: auto;
     white-space: nowrap;
 }
 
-/* Общий стиль кнопок */
 .my-btn {
     margin: 5px;
-    width: 60px;                 /* чуть шире для удобства */
+    width: 60px;
     height: 60px;
-    border-radius: 12px;         /* квадратные с лёгким скруглением (не круглые) */
+    border-radius: 12px;
     border: none;
     background: #515151;
     color: white;
@@ -65,43 +59,37 @@ body {
     user-select: none;
 }
 
-/* Кнопки первостепенных операций (primary) */
 .my-btn.primary {
-    background: #2196f3;         /* новая цветовая палитра: синий */
+    background: #f32121;
 }
 
-/* Кнопки второстепенных операций (secondary) */
 .my-btn.secondary {
-    background: #607d8b;         /* серо-голубой */
+    background: #8b6060;
 }
 
-/* Кнопка "=" широкая */
 .my-btn.execute {
     width: 130px;
     border-radius: 12px;
 }
 
-/* Эффект наведения */
 .my-btn:hover {
-    background: #ff9800;
+    background: #9f2e2e;
     transform: scale(1.02);
 }
 
 .my-btn.primary:hover {
-    background: #0b5e9e;
+    background: #7a0000;
 }
 
 .my-btn.secondary:hover {
-    background: #455a64;
+    background: #644545;
 }
 
-/* Активное состояние (нажатие) */
 .my-btn:active {
     filter: brightness(85%);
     transform: scale(0.98);
 }
 
-/* Ряды кнопок */
 .buttons {
     display: flex;
     flex-direction: column;
@@ -113,7 +101,6 @@ body {
     justify-content: space-between;
 }
 
-/* Дополнительные элементы управления */
 .extra-controls {
     display: flex;
     justify-content: space-between;
@@ -146,7 +133,6 @@ body {
     background-color: #3a3f44;
 }
 
-/* Блок с подробностями (сворачиваемый) */
 .author-details {
     margin-top: 15px;
     padding: 10px;
@@ -158,7 +144,7 @@ body {
 .author-details summary {
     font-weight: bold;
     cursor: pointer;
-    color: #ff9800;
+    color: #ff000082;
 }
 
 /* Цель ЛР с подсветкой */
@@ -172,13 +158,12 @@ body {
 }
 
 .lab-purpose mark {
-    background-color: #ff9800;
+    background-color: #ff000084;
     color: #1e1e1e;
     padding: 2px 4px;
     border-radius: 4px;
 }
 
-/* Надпись внизу */
 .footer-note {
     margin-top: 15px;
     text-align: center;
@@ -188,31 +173,30 @@ body {
     padding-top: 10px;
 }
 
-/* Дополнительные стили для смены темы (динамически через JS) */
 body.light-theme .calculator {
     background-color: #f5f5f5;
 }
 
 body.light-theme .result {
     background-color: #e0e0e0;
-    color: #4caf50;
+    color: #af4c4c;
 }
 
 body.light-theme .my-btn {
-    background: #9e9e9e;
+    background: #cdcdcd;
     color: #000;
 }
 
 body.light-theme .my-btn.primary {
-    background: #4caf50;
+    background: #af4c4c;
 }
 
 body.light-theme .my-btn.secondary {
-    background: #ff9800;
+    background: #a0000071;
 }
 
 body.light-theme .my-btn:hover {
-    background: #ffc107;
+    background: #a8000092;
 }
 
 body.light-theme .extra-controls .dropdown,
@@ -227,15 +211,14 @@ body.light-theme .footer-note {
 }
 
 body.light-theme .author-details summary {
-    color: #4caf50;
+    color: #9f0000cd;
 }
 
 body.light-theme .lab-purpose mark {
-    background-color: #ffc107;
+    background-color: #9f0000cd;
     color: #000;
 }
 
-/* Зелёная тема */
 body.green-theme .calculator {
     background-color: #1e3a2f;
 }
@@ -252,7 +235,6 @@ body.green-theme .my-btn:hover {
     background-color: #ffb74d;
 }
 
-/* Синяя тема */
 body.blue-theme .calculator {
     background-color: #0d2b3e;
 }
