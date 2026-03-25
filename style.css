@@ -1,0 +1,270 @@
+/* Общие стили для всей страницы */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); /* любое изображение на фон */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Контейнер для центрирования калькулятора */
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Основной блок калькулятора */
+.calculator {
+    background-color: #1e1e1e;  /* тёмный фон калькулятора (ночная тема) */
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    width: 300px;
+}
+
+/* Экран результата */
+.result {
+    width: auto;
+    height: 80px;                /* увеличенный размер окна вывода */
+    background-color: #2d2d2d;
+    border-radius: 5px;         /* скругленные края */
+    text-align: right;
+    padding: 0 15px;
+    margin-bottom: 20px;
+    color: #4caf50;              /* изменён цвет вывода (зелёный) */
+    font-size: 2.5rem;
+    font-family: 'Courier New', monospace; /* изменён шрифт цифр */
+    font-weight: bold;           /* более толстый шрифт */
+    line-height: 80px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Общий стиль кнопок */
+.my-btn {
+    margin: 5px;
+    width: 60px;                 /* чуть шире для удобства */
+    height: 60px;
+    border-radius: 12px;         /* квадратные с лёгким скруглением (не круглые) */
+    border: none;
+    background: #515151;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Кнопки первостепенных операций (primary) */
+.my-btn.primary {
+    background: #2196f3;         /* новая цветовая палитра: синий */
+}
+
+/* Кнопки второстепенных операций (secondary) */
+.my-btn.secondary {
+    background: #607d8b;         /* серо-голубой */
+}
+
+/* Кнопка "=" широкая */
+.my-btn.execute {
+    width: 130px;
+    border-radius: 12px;
+}
+
+/* Эффект наведения */
+.my-btn:hover {
+    background: #ff9800;
+    transform: scale(1.02);
+}
+
+.my-btn.primary:hover {
+    background: #0b5e9e;
+}
+
+.my-btn.secondary:hover {
+    background: #455a64;
+}
+
+/* Активное состояние (нажатие) */
+.my-btn:active {
+    filter: brightness(85%);
+    transform: scale(0.98);
+}
+
+/* Ряды кнопок */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Дополнительные элементы управления */
+.extra-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.dropdown {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #2d2d2d;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.github-link {
+    display: inline-block;
+    background-color: #24292e;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.github-link:hover {
+    background-color: #3a3f44;
+}
+
+/* Блок с подробностями (сворачиваемый) */
+.author-details {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    color: #ddd;
+}
+
+.author-details summary {
+    font-weight: bold;
+    cursor: pointer;
+    color: #ff9800;
+}
+
+/* Цель ЛР с подсветкой */
+.lab-purpose {
+    margin-top: 15px;
+    background-color: #2d2d2d;
+    padding: 10px;
+    border-radius: 10px;
+    color: #ddd;
+    font-size: 0.9rem;
+}
+
+.lab-purpose mark {
+    background-color: #ff9800;
+    color: #1e1e1e;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+/* Надпись внизу */
+.footer-note {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #aaa;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+}
+
+/* Дополнительные стили для смены темы (динамически через JS) */
+body.light-theme .calculator {
+    background-color: #f5f5f5;
+}
+
+body.light-theme .result {
+    background-color: #e0e0e0;
+    color: #4caf50;
+}
+
+body.light-theme .my-btn {
+    background: #9e9e9e;
+    color: #000;
+}
+
+body.light-theme .my-btn.primary {
+    background: #4caf50;
+}
+
+body.light-theme .my-btn.secondary {
+    background: #ff9800;
+}
+
+body.light-theme .my-btn:hover {
+    background: #ffc107;
+}
+
+body.light-theme .extra-controls .dropdown,
+body.light-theme .author-details,
+body.light-theme .lab-purpose {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+body.light-theme .footer-note {
+    color: #555;
+}
+
+body.light-theme .author-details summary {
+    color: #4caf50;
+}
+
+body.light-theme .lab-purpose mark {
+    background-color: #ffc107;
+    color: #000;
+}
+
+/* Зелёная тема */
+body.green-theme .calculator {
+    background-color: #1e3a2f;
+}
+body.green-theme .my-btn.primary {
+    background-color: #2e7d32;
+}
+body.green-theme .my-btn.secondary {
+    background-color: #81c784;
+}
+body.green-theme .result {
+    color: #a5d6a7;
+}
+body.green-theme .my-btn:hover {
+    background-color: #ffb74d;
+}
+
+/* Синяя тема */
+body.blue-theme .calculator {
+    background-color: #0d2b3e;
+}
+body.blue-theme .my-btn.primary {
+    background-color: #1976d2;
+}
+body.blue-theme .my-btn.secondary {
+    background-color: #64b5f6;
+}
+body.blue-theme .result {
+    color: #bbdefb;
+}
+body.blue-theme .my-btn:hover {
+    background-color: #ffb74d;
+}
