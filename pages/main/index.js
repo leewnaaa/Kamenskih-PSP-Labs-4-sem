@@ -50,7 +50,6 @@ export class MainPage {
 
     clickCard = (e) => {
         const cardId = e.target.closest('button').dataset.id;
-        this.toast.show("Переход", `Открыт счёт №${cardId}`, "primary");
         const productPage = new ProductPage(this.parent, cardId, this.toast);
         productPage.render();
     };

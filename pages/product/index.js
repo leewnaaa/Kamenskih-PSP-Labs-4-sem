@@ -49,7 +49,6 @@ export class ProductPage {
     }
 
     clickBack = () => {
-        this.toast.show("Навигация", "Возврат на главную страницу", "success");
         const mainPage = new MainPage(this.parent);
         mainPage.render();
     };
@@ -68,6 +67,5 @@ export class ProductPage {
         const product = new ProductComponent(this.pageRoot);
         product.render(data);
 
-        this.toast.show("Информация по счёту", `Вы просматриваете "${data.accountName}"`, "info");
     }
 }
