@@ -4,20 +4,33 @@ export class ProductCardComponent {
     }
 
     getHTML(data) {
+        // форматирование номера карты/счета
+        const maskedNumber = data.accountNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
         return `
-            <div class="card mb-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">${data.accountName}</h5>
-                    <p class="card-text">Баланс: ${data.balance} ₽</p>
-                    <p class="card-text">Номер счета: ${data.accountNumber}</p>
-                    <button class="btn btn-primary" id="click-card-${data.id}" data-id="${data.id}">Подробнее</button>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="account-card">
+                    <div class="card-header-red">
+                        <i class="fas fa-credit-card me-1"></i> ${data.type || 'Счёт'}
+                    </div>
+                    <div class="card-body-custom">
+                        <small class="text-muted">Баланс</small>
+                        <div class="account-balance">${data.balance.toLocaleString()} ₽</div>
+                        <div class="account-number"><i class="far fa-credit-card"></i> ${maskedNumber}</div>
+                        <div class="mt-2"><small>Срок действия: ${data.expiry || '12/27'}</small></div>
+                    </div>
+                    <div class="card-footer-custom">
+                        <button class="btn btn-alfa w-100" id="click-card-${data.id}" data-id="${data.id}">
+                            <i class="fas fa-arrow-right me-1"></i> Подробнее
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
     }
 
     addListeners(data, listener) {
-        document.getElementById(`click-card-${data.id}`).addEventListener("click", listener);
+        const btn = document.getElementById(`click-card-${data.id}`);
+        if (btn) btn.addEventListener("click", listener);
     }
 
     render(data, listener) {
