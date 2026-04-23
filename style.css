@@ -64,7 +64,7 @@ body {
 }
 
 .my-btn.secondary {
-    background: #8b6060;
+    background: #8b6074;
 }
 
 .my-btn.execute {
@@ -147,7 +147,6 @@ body {
     color: #ff000082;
 }
 
-/* Цель ЛР с подсветкой */
 .lab-purpose {
     margin-top: 15px;
     background-color: #2d2d2d;
@@ -155,6 +154,7 @@ body {
     border-radius: 10px;
     color: #ddd;
     font-size: 0.9rem;
+    text-align: center;
 }
 
 .lab-purpose mark {
@@ -249,4 +249,42 @@ body.blue-theme .result {
 }
 body.blue-theme .my-btn:hover {
     background-color: #ffb74d;
+}
+
+
+/* Дополнительный класс для кнопок с текстом (Цвет вывода, Цвет фона) */
+.my-btn.wide {
+    width: auto;
+    padding: 0 12px;
+    font-size: 1.2rem;
+}
+
+/* Небольшое улучшение для читаемости на мобильных */
+@media (max-width: 380px) {
+    .my-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin: 3px;
+    }
+    .my-btn.wide {
+        padding: 0 8px;
+    }
+    .my-btn.execute {
+        width: 110px;
+    }
+}
+
+/* Кнопка сброса темы – такой же стиль, как у других */
+#reset-theme {
+    background: #515151;
+    color: white;
+}
+body.light-theme #reset-theme {
+    background: #cdcdcd;
+    color: #000;
+}
+body.green-theme #reset-theme,
+body.blue-theme #reset-theme {
+    background: #515151;
 }
