@@ -1,40 +1,42 @@
+import { sumDiagonals } from "../../utils/matrix.js";
+import { flatten } from "../../utils/flatten.js";
+
 export class ProductComponent {
-    constructor(parent) {
+    constructor(parent, toastCallback) {
         this.parent = parent;
+        this.toast = toastCallback; // функция для показа тостов
     }
 
-    // Функция вычисления оставшихся дней до окончания срока
-    getDaysLeft(expiry) {
-        if (!expiry || expiry === '—') return null;
-        // expiry имеет формат "MM/YY"
-        const [month, year] = expiry.split('/');
-        // текущая дата
-        const now = new Date();
-        // дата окончания: первое число следующего месяца после expiry
-        // (срок действует до последнего дня указанного месяца)
-        const expiryDate = new Date(2000 + parseInt(year), parseInt(month), 0); // последний день месяца
-        // разница в днях
-        const diffTime = expiryDate - now;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        return diffDays;
+    getMatrixForAccount(accountId) {
+        const matrices = {
+            1: [[1,2,3], [4,5,6], [7,8,9]],
+            2: [[2,4,6], [8,10,12], [14,16,18]],
+            3: [[5,0,0], [0,5,0], [0,0,5]]
+        };
+        return matrices[accountId] || [[1,2,3], [4,5,6], [7,8,9]];
     }
 
-    // Получение стиля и текста для предупреждения
-    getWarningInfo(expiry) {
-        const daysLeft = this.getDaysLeft(expiry);
-        if (daysLeft === null) return null;
-        if (daysLeft < 0) {
-            return { text: '⚠️ Срок действия истёк!', class: 'text-danger fw-bold' };
-        } else if (daysLeft <= 30) {
-            return { text: `⚠️ Срок истекает через ${daysLeft} дней!`, class: 'text-danger fw-bold' };
-        } else if (daysLeft <= 90) {
-            return { text: `ℹ️ Срок истекает через ${daysLeft} дней (через ${Math.ceil(daysLeft/30)} мес.)`, class: 'text-warning' };
-        }
-        return { text: `✅ Срок действия действителен ещё ${daysLeft} дней`, class: 'text-success' };
+    getNestedOperations() {
+        return [1, 2, 3, [4, 5, 6, [10, 20, 30]], [100, [200]]];
     }
 
-    getHTML(data) {
-        const expiryWarning = this.getWarningInfo(data.expiry);
+    handleSumDiagonals(accountId) {
+        const matrix = this.getMatrixForAccount(accountId);
+        const result = sumDiagonals(matrix);
+        this.toast("Сумма диагоналей", `Результат = ${result}`, "primary");
+    }
+
+    handleFlatten() {
+        const nested = this.getNestedOperations();
+        const flat = flatten(nested);
+        this.toast("Flatten операций", `[${flat.join(", ")}]`, "info");
+    }
+
+    getHTML(data, accountId) {
+        const matrix = this.getMatrixForAccount(accountId);
+        const matrixPreview = matrix.map(row => `[${row.join(", ")}]`).join(" ");
+        const nestedPreview = "[1, 2, 3, [4, 5, 6, [10, 20, 30]], [100, [200]]]";
+
         return `
             <div class="detail-card">
                 <div class="detail-header">
@@ -50,14 +52,31 @@ export class ProductComponent {
                         ${data.percent ? `<tr><td><i class="fas fa-percent"></i> Ставка</td><td>${data.percent}</td></tr>` : ''}
                         <tr><td><i class="far fa-calendar-alt"></i> Срок действия</td><td>${data.expiry}</td></tr>
                     </table>
-                    ${expiryWarning ? `<div class="alert alert-${expiryWarning.class.includes('danger') ? 'danger' : (expiryWarning.class.includes('warning') ? 'warning' : 'info')} mt-2" role="alert">${expiryWarning.text}</div>` : ''}
+
+                    <hr>
+                    <h5><i class="fas fa-chart-simple"></i> Анализ матрицы транзакций</h5>
+                    <p>Матрица расходов (3×3):<br>${matrixPreview}</p>
+                    <button class="btn btn-outline-alfa btn-sm" id="sumDiagBtn">Вычислить сумму диагоналей</button>
+
+                    <hr class="mt-3">
+                    <h5><i class="fas fa-code-branch"></i> Вложенные операции</h5>
+                    <p>Исходный массив:<br><code>${nestedPreview}</code></p>
+                    <button class="btn btn-outline-alfa btn-sm" id="flattenBtn">Преобразовать в плоский список (flatten)</button>
                 </div>
             </div>
         `;
     }
 
-    render(data) {
-        const html = this.getHTML(data);
+    addListeners(accountId) {
+        const sumBtn = document.getElementById("sumDiagBtn");
+        if (sumBtn) sumBtn.addEventListener("click", () => this.handleSumDiagonals(accountId));
+        const flatBtn = document.getElementById("flattenBtn");
+        if (flatBtn) flatBtn.addEventListener("click", () => this.handleFlatten());
+    }
+
+    render(data, accountId) {
+        const html = this.getHTML(data, accountId);
         this.parent.insertAdjacentHTML('beforeend', html);
+        this.addListeners(accountId);
     }
 }
