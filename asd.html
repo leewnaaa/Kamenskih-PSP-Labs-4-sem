@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачи 2.7 и 3.3 — гибкий ввод</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: linear-gradient(135deg, #1e2a3a 0%, #0f1724 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .app-container {
+            max-width: 950px;
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+        }
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: 0.2s;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+        }
+        .card-header {
+            background: #1e293b;
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .card-header span:first-child {
+            font-size: 1.6rem;
+        }
+        .card-body {
+            padding: 1.8rem;
+        }
+        textarea {
+            width: 100%;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            padding: 0.8rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 1rem;
+            background: #f8fafc;
+            resize: vertical;
+            transition: 0.2s;
+        }
+        textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 2rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: 0.2s;
+            width: 100%;
+        }
+        button:hover {
+            background: #2563eb;
+            transform: scale(0.98);
+        }
+        .result-block {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 1rem;
+            border-left: 6px solid #10b981;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #0f1724;
+            word-break: break-word;
+        }
+        .error-block {
+            border-left-color: #ef4444;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .example {
+            background: #eef2ff;
+            padding: 0.7rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #1e293b;
+            border: 1px solid #c7d2fe;
+        }
+        .badge {
+            background: #10b981;
+            border-radius: 999px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            font-weight: normal;
+            margin-left: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 640px) {
+            .card-body { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <!-- ЗАДАНИЕ 2.7 - Сумма диагоналей -->
+    <div class="card">
+        <div class="card-header">
+            Задание 2.7 — Сумма диагоналей
+        </div>
+        <div class="card-body">
+            <label style="font-weight:600; margin-bottom:8px; display:block;"> Введите квадратную матрицу:</label>
+            <textarea id="matrixInput" rows="3" placeholder=''></textarea>
+            <button id="calcDiagBtn">Вычислить сумму (гл. + побоч.)</button>
+            <div id="diagResult" class="result-block" style="display: none;"></div>
+            <div class="example">
+                💡 <strong>Примеры ввода:</strong><br>
+                • <code>[[1,2,3],[4,5,6],[7,8,9]]</code><br>
+                • <code>[ [1, 2, 3], [4, 5, 6], [7, 8, 9] ]</code>  (пробелы)<br>
+                • <code>[[1,2,3], [4,5,6], [7,8,9]]</code><br>
+                • <code>[ [1,2,3], [4,5,6], [7,8,9] ]</code> + переносы строк — всё работает.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3.3 - Flatten (любая вложенность) -->
+    <div class="card">
+        <div class="card-header">
+             Задание 3.3 — Flatten
+        </div>
+        <div class="card-body">
+            <label style="font-weight:600; margin-bottom:8px; display:block;"> Введите массив (может содержать вложенные массивы):</label>
+            <textarea id="arrayInput" rows="3" placeholder=''></textarea>
+            <button id="flattenBtn"> Развернуть в плоский массив</button>
+            <div id="flattenResult" class="result-block" style="display: none;"></div>
+            <div class="example">
+                💡 <strong>Примеры ввода (всё поддерживается):</strong><br>
+                • <code>[1,2,3,[4,5,6,[10,20,30]]]</code><br>
+                • <code>[1, 2, 3, [4, 5, 6, [10, 20, 30]]]</code>  (пробелы)<br>
+                • <code>[ 1, 2, 3, [ 4, 5, 6, [ 10, 20, 30 ] ] ]</code><br>
+            </div>
+        </div>
+    </div>
+    <footer> Камеснких Е.А. ИУ5-43Б </footer>
+</div>
+
+<script>
+    // =============== УНИВЕРСАЛЬНЫЙ ПАРСЕР (терпимый к форматированию) ===============
+    function tolerantParse(inputStr) {
+        // 1. Убираем лишние пробелы в начале и конце
+        let cleaned = inputStr.trim();
+
+        // 2. Заменяем одинарные кавычки на двойные (если пользователь ввёл через ')
+        //    Но аккуратно: не трогаем кавычки внутри строк (у нас строк нет, только числа)
+        //    Также заменяем " на " (оставляем двойные как есть)
+        if (cleaned.includes("'")) {
+            // Простая замена: все одинарные кавычки -> двойные
+            // Это сработает, так как внутри нет экранированных символов
+            cleaned = cleaned.replace(/'/g, '"');
+        }
+
+        // 3. Удаляем все пробелы между токенами? Нет, JSON.parse сам их переварит.
+        //    Но для надёжности можно убрать переносы строк и табуляции (они не нужны)
+        cleaned = cleaned.replace(/\n/g, ' ').replace(/\r/g, '').replace(/\t/g, ' ');
+
+        // 4. Пробуем распарсить
+        try {
+            return JSON.parse(cleaned);
+        } catch (e) {
+            // 5. Если не удалось, возможно, проблема в отсутствии внешних скобок массива
+            //    Добавим их для матрицы? Но лучше выбросить понятную ошибку
+            throw new Error(`Не удалось разобрать ввод. Проверьте синтаксис: используйте квадратные скобки, числа через запятую. Ошибка: ${e.message}`);
+        }
+    }
+
+    // =============== ЗАДАНИЕ 2.7 ===============
+    function sumMatrixDiagonals(matrix) {
+        const n = matrix.length;
+        let total = 0;
+        for (let i = 0; i < n; i++) {
+            total += matrix[i][i];
+            total += matrix[i][n - 1 - i];
+        }
+        if (n % 2 === 1) {
+            const mid = Math.floor(n / 2);
+            total -= matrix[mid][mid];
+        }
+        return total;
+    }
+
+    function parseAndValidateMatrix(rawInput) {
+        let parsed = tolerantParse(rawInput);
+
+        if (!Array.isArray(parsed)) {
+            throw new Error("❌ Матрица должна быть массивом массивов ([[...], [...]])");
+        }
+        if (parsed.length === 0) {
+            throw new Error("❌ Матрица не может быть пустой");
+        }
+        const n = parsed.length;
+        for (let i = 0; i < n; i++) {
+            if (!Array.isArray(parsed[i])) {
+                throw new Error(`❌ Строка ${i} не является массивом`);
+            }
+            if (parsed[i].length !== n) {
+                throw new Error(`❌ Матрица не квадратная! Строка ${i} содержит ${parsed[i].length} элементов, а должно быть ${n}`);
+            }
+            for (let j = 0; j < n; j++) {
+                const val = parsed[i][j];
+                if (typeof val !== 'number' || isNaN(val)) {
+                    throw new Error(`❌ Элемент [${i}][${j}] = ${JSON.stringify(val)} не число`);
+                }
+            }
+        }
+        return parsed;
+    }
+
+    function renderDiagonalsResult(matrix) {
+        const n = matrix.length;
+        const mainDiag = [];
+        const secondaryDiag = [];
+        for (let i = 0; i < n; i++) {
+            mainDiag.push(matrix[i][i]);
+            secondaryDiag.push(matrix[i][n - 1 - i]);
+        }
+        const sumMain = mainDiag.reduce((a,b) => a + b, 0);
+        const sumSec = secondaryDiag.reduce((a,b) => a + b, 0);
+        const total = sumMatrixDiagonals(matrix);
+
+        let html = `<strong>✅ РЕЗУЛЬТАТ: ${total}</strong><br>`;
+        html += `Главная диагональ: [${mainDiag.join(', ')}] → сумма = ${sumMain}<br>`;
+        html += `Побочная диагональ: [${secondaryDiag.join(', ')}] → сумма = ${sumSec}<br>`;
+        if (n % 2 === 1) {
+            const center = matrix[Math.floor(n/2)][Math.floor(n/2)];
+            html += `<span style="font-size:0.85rem;"> Центральный элемент (${center}) был учтён дважды → вычли один раз.</span>`;
+        } else {
+            html += `<span style="font-size:0.85rem;"> Матрица чётного размера, пересечения диагоналей нет.</span>`;
+        }
+        return html;
+    }
+
+    // =============== ЗАДАНИЕ 3.3 ===============
+    function flattenDeep(arr) {
+        const result = [];
+        function recursiveFlatten(item) {
+            if (Array.isArray(item)) {
+                for (const sub of item) {
+                    recursiveFlatten(sub);
+                }
+            } else {
+                result.push(item);
+            }
+        }
+        recursiveFlatten(arr);
+        return result;
+    }
+
+    function parseAndValidateArray(rawInput) {
+        let parsed = tolerantParse(rawInput);
+        if (!Array.isArray(parsed)) {
+            throw new Error("❌ Входные данные должны быть массивом (квадратные скобки).");
+        }
+        if (parsed.length === 0) {
+            throw new Error("❌ Массив не может быть пустым.");
+        }
+        return parsed;
+    }
+
+    // =============== ПОДКЛЮЧЕНИЕ КНОПОК ===============
+    const matrixTextarea = document.getElementById('matrixInput');
+    const diagResultDiv = document.getElementById('diagResult');
+    const calcBtn = document.getElementById('calcDiagBtn');
+
+    const arrayTextarea = document.getElementById('arrayInput');
+    const flattenResultDiv = document.getElementById('flattenResult');
+    const flattenBtn = document.getElementById('flattenBtn');
+
+    calcBtn.addEventListener('click', () => {
+        const raw = matrixTextarea.value;
+        diagResultDiv.style.display = 'block';
+        try {
+            const matrix = parseAndValidateMatrix(raw);
+            const resultHtml = renderDiagonalsResult(matrix);
+            diagResultDiv.innerHTML = resultHtml;
+            diagResultDiv.classList.remove('error-block');
+            diagResultDiv.classList.add('result-block');
+        } catch (err) {
+            diagResultDiv.innerHTML = `<span style="font-weight:bold;">⚠️ Ошибка</span><br>${err.message}`;
+            diagResultDiv.classList.add('error-block');
+            diagResultDiv.classList.remove('result-block');
+        }
+    });
+
+    flattenBtn.addEventListener('click', () => {
+        const raw = arrayTextarea.value;
+        flattenResultDiv.style.display = 'block';
+        try {
+            const arr = parseAndValidateArray(raw);
+            const flatArray = flattenDeep(arr);
+            let flatStr = JSON.stringify(flatArray);
+            if (flatStr.length > 500) {
+                flatStr = flatStr.slice(0, 500) + '… (обрезано)';
+            }
+            flattenResultDiv.innerHTML = `
+                <strong>✅ РЕЗУЛЬТАТ (плоский массив):</strong><br>
+                <code style="background:#e2e8f0; padding:4px 8px; border-radius:8px; display:inline-block; margin-top:6px;">${flatStr}</code><br>
+                Количество элементов: ${flatArray.length}<br>
+                Исходный ввод: ${raw.length} символов
+            `;
+            flattenResultDiv.classList.remove('error-block');
+            flattenResultDiv.classList.add('result-block');
+        } catch (err) {
+            flattenResultDiv.innerHTML = `<span style="font-weight:bold;">❌ Ошибка ввода</span><br>${err.message}`;
+            flattenResultDiv.classList.add('error-block');
+            flattenResultDiv.classList.remove('result-block');
+        }
+    });
+
+    // Скрыть результаты при загрузке
+    diagResultDiv.style.display = 'none';
+    flattenResultDiv.style.display = 'none';
+</script>
+</body>
+</html>
