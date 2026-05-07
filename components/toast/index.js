@@ -2,7 +2,6 @@ export class ToastComponent {
     constructor(containerId = 'toastContainer') {
         this.container = document.getElementById(containerId);
         if (!this.container) {
-            // создаём контейнер, если его нет
             this.container = document.createElement('div');
             this.container.id = containerId;
             this.container.className = 'toast-container-custom';

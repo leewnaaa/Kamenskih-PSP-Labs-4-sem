@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Альфа-Банк | Мои счета</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome Icons (бесплатно) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Дополнительные стили -->
+
     <style>
         * {
             margin: 0;
@@ -21,7 +19,6 @@
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Шапка в стиле Альфа-Банка */
         .alfa-header {
             background: linear-gradient(135deg, #E31E24 0%, #B21217 100%);
             color: white;
@@ -43,7 +40,7 @@
             opacity: 0.9;
             margin-top: 5px;
         }
-        /* Карточка счёта */
+
         .account-card {
             background: white;
             border-radius: 24px;
@@ -116,7 +113,6 @@
             z-index: 1100;
             min-width: 280px;
         }
-        /* Детальная страница */
         .detail-card {
             background: white;
             border-radius: 32px;
@@ -149,7 +145,6 @@
             color: #B21217;
             transform: translateX(-3px);
         }
-        /* Анимация появления */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -185,7 +180,6 @@
 
     <div id="root" class="container my-4"></div>
 
-    <!-- Место для тостов -->
     <div class="toast-container-custom" id="toastContainer"></div>
 
     <footer>

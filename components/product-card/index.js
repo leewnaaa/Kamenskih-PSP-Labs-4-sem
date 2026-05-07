@@ -4,7 +4,6 @@ export class ProductCardComponent {
     }
 
     getHTML(data) {
-        // форматирование номера карты/счета
         const maskedNumber = data.accountNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
         return `
             <div class="col-md-4 col-sm-6 mb-4">
