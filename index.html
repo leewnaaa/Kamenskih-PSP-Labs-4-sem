@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Альфа-Банк | Мои счета</title>
+    <title>Альфа-Банк</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -41,6 +41,47 @@
             margin-top: 5px;
         }
 
+        /* новые стили для навигации и загрузки */
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .nav-btn:hover {
+            background: white;
+            color: #E31E24;
+            transform: translateY(-2px);
+        }
+        .upload-area {
+            background: rgba(255,255,255,0.2);
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+        .upload-area label {
+            cursor: pointer;
+            margin: 0;
+            font-weight: 500;
+        }
+        .upload-area input {
+            display: none;
+        }
+
+        /* остальные существующие стили */
         .account-card {
             background: white;
             border-radius: 24px;
@@ -105,7 +146,6 @@
             background: #E31E24;
             color: white;
         }
-        /* Контейнер для тостов */
         .toast-container-custom {
             position: fixed;
             bottom: 20px;
@@ -170,11 +210,22 @@
 </head>
 <body>
     <div class="alfa-header">
-        <div class="container">
-            <div class="logo">
-                <i class="fas fa-shield-alt"></i> Альфа-Банк
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <div>
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i> Альфа-Банк
+                </div>
+                <div class="tagline">Управляйте счетами</div>
             </div>
-            <div class="tagline">Управляйте счетами легко и безопасно</div>
+            <div class="nav-links">
+                <button id="nav-main-btn" class="nav-btn"><i class="fas fa-credit-card"></i> Мои счета</button>
+                <button id="nav-gallery-btn" class="nav-btn"><i class="fas fa-cube"></i> 3D Галерея</button>
+                <div class="upload-area">
+                    <i class="fas fa-upload"></i>
+                    <label for="uploadModelInput">Загрузить .glb</label>
+                    <input type="file" id="uploadModelInput" accept=".glb">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -185,6 +236,15 @@
     <footer>
         <i class="fas fa-lock"></i> Безопасность превыше всего | © Альфа-Банк, 2025
     </footer>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
 
     <script src="main.js" type="module"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
