@@ -34,5 +34,13 @@
     "type": "Дебетовая",
     "expiry": "08/28",
     "creditLimit": null
+  },
+  {
+    "id": 5,
+    "accountName": "Кредитка",
+    "accountNumber": "1234 5678 9012 3459",
+    "balance": 30000,
+    "type": "Кредитная",
+    "expiry": "30/04"
   }
 ]

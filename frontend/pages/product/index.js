@@ -1,3 +1,5 @@
+import { ajax } from "../../modules/ajax.js";
+import { stockUrls } from "../../modules/stockUrls.js";
 import { ProductComponent } from "../../components/product/index.js";
 import { MainPage } from "../main/index.js";
 import { ToastComponent } from "../../components/toast/index.js";
@@ -9,21 +11,36 @@ export class ProductPage {
         this.toast = toastInstance || new ToastComponent();
     }
 
-    async getData() {
-        const res = await fetch(`http://localhost:3000/api/accounts/${this.id}`);
-        if (!res.ok) return null;
-        return res.json();
+    getData() {
+        ajax.get(stockUrls.getStockById(this.id), (data, status) => {
+            if (status === 200 && data) {
+                this.renderData(data);
+            } else {
+                this.toast.show('Ошибка', 'Счёт не найден', 'danger');
+                this.pageRoot.insertAdjacentHTML('beforeend', '<div class="alert alert-danger">Счёт не найден</div>');
+            }
+        });
     }
 
-    get pageRoot() { return document.getElementById('product-page'); }
-    getHTML() { return `<div id="product-page" class="animated-page py-3"></div>`; }
+    renderData(item) {
+    const product = new ProductComponent(this.pageRoot);
+    product.render(item);
+}
+
+    get pageRoot() {
+        return document.getElementById('product-page');
+    }
+
+    getHTML() {
+        return `<div id="product-page" class="animated-page py-3"></div>`;
+    }
 
     clickBack = () => {
-
+        const mainPage = new MainPage(this.parent);
         mainPage.render();
     };
 
-    async render() {
+    render() {
         this.parent.innerHTML = '';
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
@@ -32,14 +49,6 @@ export class ProductPage {
         this.pageRoot.insertAdjacentHTML('afterbegin', backBtnHtml);
         document.getElementById('back-button').addEventListener('click', this.clickBack);
 
-        const data = await this.getData();
-        if (!data) {
-            this.pageRoot.insertAdjacentHTML('beforeend', '<div class="alert alert-danger">Счёт не найден</div>');
-            return;
-        }
-
-        const product = new ProductComponent(this.pageRoot, (title, msg, type) => this.toast.show(title, msg, type));
-        product.render(data, this.id);
-        this.toast.show("Информация по счёту", `Вы просматриваете "${data.accountName}"`, "info");
+        this.getData();
     }
 }

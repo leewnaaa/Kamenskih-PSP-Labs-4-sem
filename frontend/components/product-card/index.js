@@ -9,7 +9,7 @@ export class ProductCardComponent {
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="account-card">
                     <div class="card-header-red">
-                        <i class="fas fa-credit-card me-1"></i> ${data.type || 'Счёт'}
+                        <i class="fas fa-credit-card me-1"></i> ${data.accountName}
                     </div>
                     <div class="card-body-custom">
                         <small class="text-muted">Баланс</small>
