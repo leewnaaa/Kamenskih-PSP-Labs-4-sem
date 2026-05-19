@@ -11,25 +11,17 @@ export class ProductPage {
         this.toast = toastInstance || new ToastComponent();
     }
 
-    getData() {
-        ajax.get(stockUrls.getStockById(this.id), (data, status) => {
-            if (status === 200 && data) {
-                this.renderData(data);
-            } else {
-                this.toast.show('Ошибка', 'Счёт не найден', 'danger');
-                this.pageRoot.insertAdjacentHTML('beforeend', '<div class="alert alert-danger">Счёт не найден</div>');
-            }
-        });
+    async getData() {
+        try {
+            const data = await ajax.get(stockUrls.getStockById(this.id));
+            return data;
+        } catch (err) {
+            this.toast.show('Ошибка', 'Счёт не найден', 'danger');
+            return null;
+        }
     }
 
-    renderData(item) {
-    const product = new ProductComponent(this.pageRoot);
-    product.render(item);
-}
-
-    get pageRoot() {
-        return document.getElementById('product-page');
-    }
+    get pageRoot() { return document.getElementById('product-page'); }
 
     getHTML() {
         return `<div id="product-page" class="animated-page py-3"></div>`;
@@ -40,7 +32,7 @@ export class ProductPage {
         mainPage.render();
     };
 
-    render() {
+    async render() {
         this.parent.innerHTML = '';
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
@@ -49,6 +41,13 @@ export class ProductPage {
         this.pageRoot.insertAdjacentHTML('afterbegin', backBtnHtml);
         document.getElementById('back-button').addEventListener('click', this.clickBack);
 
-        this.getData();
+        const data = await this.getData();
+        if (data) {
+            const product = new ProductComponent(this.pageRoot);
+            product.render(data);
+
+        } else {
+            this.pageRoot.insertAdjacentHTML('beforeend', '<div class="alert alert-danger">Счёт не найден</div>');
+        }
     }
 }

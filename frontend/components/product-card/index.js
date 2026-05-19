@@ -4,7 +4,7 @@ export class ProductCardComponent {
     }
 
     getHTML(data) {
-        const maskedNumber = data.accountNumber; // уже может быть с пробелами
+        const maskedNumber = data.accountNumber;
         return `
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="account-card">
