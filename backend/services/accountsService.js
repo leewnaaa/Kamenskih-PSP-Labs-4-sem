@@ -1,7 +1,10 @@
 const fileService = require('./fileService');
+
 let dataFilePath;
 
-const init = (filePath) => { dataFilePath = filePath; };
+const init = (filePath) => {
+    dataFilePath = filePath;
+};
 
 const findAll = (title) => {
     const accounts = fileService.readData(dataFilePath);
