@@ -27,6 +27,10 @@ app.use((req, res, next) => {
 // Предполагается, что сборка Vite лежит в папке backend/static
 app.use(express.static(path.join(__dirname, 'static')));
 
+app.get('/ping', (req, res) => {
+    res.json({ message: 'pong' });
+});
+
 // API маршруты
 app.use('/api/accounts', accountsRouter);
 
