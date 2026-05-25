@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const path = require('path');
 const accountsRouter = require('./routes/accounts');
 const accountsService = require('./services/accountsService');
@@ -7,21 +6,18 @@ const accountsService = require('./services/accountsService');
 const app = express();
 const PORT = 3000;
 
-// Путь к файлу данных
 const DATA_PATH = path.join(__dirname, 'data/accounts.json');
 accountsService.init(DATA_PATH);
 
-// Middleware
-app.use(cors());              // разрешаем запросы с фронта (Live Server на другом порту)
-app.use(express.json());      // парсинг JSON
+app.use(express.json());  // парсинг JSON
 
-// Логирующий middleware
+// Логирующий middleware (опционально)
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 });
 
-// Роуты
+// API маршруты
 app.use('/api/accounts', accountsRouter);
 
 // Обработка 404
@@ -29,11 +25,14 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Маршрут не найден' });
 });
 
-// Error handler
+// Глобальный обработчик ошибок
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).json({ error: 'Внутренняя ошибка сервера' });
 });
+
+// setInterval(() => {}, 1000);
+// console.log('Блокирующий таймер запущен');
 
 app.listen(PORT, () => {
     console.log(`Бэкенд запущен: http://localhost:${PORT}`);
