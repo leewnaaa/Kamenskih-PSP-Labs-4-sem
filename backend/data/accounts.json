@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "id": 1,
+    "accountName": "Дебетовая карта Premium",
+    "accountNumber": "5536 9148 2345 6789",
+    "balance": 125800,
+    "type": "Дебетовая",
+    "expiry": "08/28",
+    "creditLimit": null
+  },
+  {
+    "id": 2,
+    "accountName": "Кредитная карта 100 дней",
+    "accountNumber": "4276 8901 2345 1112",
+    "balance": 50000,
+    "type": "Кредитная",
+    "expiry": "03/26",
+    "creditLimit": "150 000 ₽"
+  },
+  {
+    "id": 5,
+    "accountName": "Крутая карта 666",
+    "accountNumber": "4081 7810 9023 4567",
+    "balance": 450300,
+    "type": "Сберегательный",
+    "expiry": "—",
+    "percent": "6%"
+  },
+  {
+    "id": 4,
+    "accountName": "Дебетовая карта PremiumLOX",
+    "accountNumber": "5536 9148 2345 6789",
+    "balance": 125800,
+    "type": "Дебетовая",
+    "expiry": "08/28",
+    "creditLimit": null
+  },
+  {
+    "id": 6,
+    "accountName": "Пример",
+    "accountNumber": "1234567890123456",
+    "balance": 777777,
+    "type": "Дебетовая",
+    "expiry": "03/35"
+  }
+]
