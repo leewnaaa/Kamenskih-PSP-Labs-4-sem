@@ -18,8 +18,8 @@
     "creditLimit": "150 000 ₽"
   },
   {
-    "id": 3,
-    "accountName": "Накопительный счёт",
+    "id": 5,
+    "accountName": "Крутая карта 666",
     "accountNumber": "4081 7810 9023 4567",
     "balance": 450300,
     "type": "Сберегательный",
@@ -34,5 +34,14 @@
     "type": "Дебетовая",
     "expiry": "08/28",
     "creditLimit": null
+  },
+  {
+    "id": 5,
+    "accountName": "Крутая карта",
+    "accountNumber": "4081 7810 9023 4567",
+    "balance": 450300,
+    "type": "Сберегательный",
+    "expiry": "—",
+    "percent": "6%"
   }
 ]
